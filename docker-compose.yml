@@ -4,16 +4,14 @@ version: "3"
 
 services:
   frontend:
-    build:
-      dockerfile: ./frontend.Dockerfile
+    build: ./frontend
     depends_on:
       - backend
     ports:
       - "8080:80"
 
   backend:
-    build:
-      dockerfile: ./backend.Dockerfile
+    build: ./backend
     depends_on:
       - redis
     ports:
