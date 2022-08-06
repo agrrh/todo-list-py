@@ -24,12 +24,12 @@ async def save_customer(todo: TodoTask):
 
 
 @app.get("/todos")
-def list_todo(request: Request, response: Response):
+async def list_todo(request: Request, response: Response):
     return {"todo": TodoTask.all_pks()}
 
 
 @app.get("/todo/{pk}")
-def get_todo(pk: str, request: Request, response: Response):
+async def get_todo(pk: str, request: Request, response: Response):
     try:
         return TodoTask.get(pk)
     except NotFoundError:
