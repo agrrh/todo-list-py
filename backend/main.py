@@ -36,7 +36,7 @@ async def get_todo(pk: str, request: Request, response: Response):
     try:
         return TodoTask.get(pk)
     except NotFoundError:
-        raise HTTPException(status_code=404, detail="Customer not found")
+        raise HTTPException(status_code=404, detail="Task not found")
 
 
 @app.on_event("startup")
