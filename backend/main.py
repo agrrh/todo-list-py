@@ -8,6 +8,7 @@ from models.todo_task import TodoTask
 from redis_om import get_redis_connection, NotFoundError
 
 from datetime import datetime
+import uuid
 
 
 app = FastAPI()
@@ -22,6 +23,7 @@ def read_root():
 
 @app.post("/todo")
 async def save_customer(todo: TodoTask):
+    todo.pk = str(uuid.uuid4())
     todo.created_at = datetime.now()
     return todo.save()
 
