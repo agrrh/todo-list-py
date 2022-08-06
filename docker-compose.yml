@@ -1,0 +1,26 @@
+---
+
+version: "3"
+
+services:
+  frontend:
+    build: ./frontend.Dockerfile
+    depends_on:
+      - backend
+    ports:
+      - "8080:80"
+
+  backend:
+    build: ./backend.Dockerfile
+    depends_on:
+      - redis
+    ports:
+      - "8081:3000"
+
+  redis:
+    image: redis:7
+    volumes:
+      - redis-data:/data
+
+volumes:
+  redis-data:
