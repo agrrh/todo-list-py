@@ -22,7 +22,7 @@ def read_root():
 
 
 @app.post("/todo")
-async def save_customer(todo: TodoTask):
+async def save_todo(todo: TodoTask):
     todo.pk = str(uuid.uuid4())
     todo.created_at = datetime.now()
     return todo.save()
