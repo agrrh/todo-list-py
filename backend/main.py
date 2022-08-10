@@ -30,7 +30,7 @@ async def save_todo(todo: TodoTask):
 
 @app.get("/todos")
 async def list_todo(request: Request, response: Response):
-    return {"todo": TodoTask.all_pks()}
+    return {"todos": [TodoTask.get(pk) for pk in TodoTask.all_pks()]}
 
 
 @app.get("/todo/{pk}")
