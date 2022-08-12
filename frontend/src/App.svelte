@@ -4,19 +4,17 @@
 </script>
 
 <main>
-  <h1 class="title">Todo List Python</h1>
+  <h1 class="header">Todo List Python</h1>
+
+  <div class="divider"></div>
 
   <div class="section">
     <Form />
   </div>
 
+  <div class="divider"></div>
+
   <div class="section">
     <List />
   </div>
 </main>
-
-<style>
-  .title:hover {
-    text-shadow: 0 0 2px #aaaaaa;
-  }
-</style>

@@ -1,4 +1,6 @@
 <script>
+  import { todosRefreshTime } from '../stores.js'
+
   let promise = fetchTodosList();
 
   async function fetchTodosList() {
@@ -11,6 +13,8 @@
       throw new Error(data);
     }
   }
+
+  todosRefreshTime.subscribe((value) => fetchTodosList(value))
 </script>
 
 <h2>Current Todos</h2>
