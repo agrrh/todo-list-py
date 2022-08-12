@@ -1,5 +1,5 @@
 <script>
-  import { todosRefreshTime } from '../stores.js'
+  import { todosRefreshTime, todos } from '../stores.js'
 
   let promise = fetchTodosList();
 
@@ -8,33 +8,25 @@
     const data = await res.json();
 
     if (res.ok) {
-      return data;
+      todos.set(data.todos)
     } else {
       throw new Error(data);
     }
   }
 
-  todosRefreshTime.subscribe((value) => fetchTodosList(value))
+  todosRefreshTime.subscribe((value) => fetchTodosList())
 </script>
 
 <h2>Current Todos</h2>
 
-{#await promise}
-  <p>...waiting</p>
-{:then data}
-  <ul>
-    {#each data.todos as todo, i}
-      <div class="card">
-        <span class="created">{todo.created_at}</span>
-        <span class="resolved">{todo.resolved_at}</span>
-        <span class="title">{todo.title}</span>
-        <span class="details">{todo.details}</span>
-      </div>
-    {/each}
-  </ul>
-{:catch error}
-  <p style="color: red">{error.message}</p>
-{/await}
+{#each $todos as todo, i}
+  <div class="card">
+    <span class="created">{todo.created_at}</span>
+    <span class="resolved">{todo.resolved_at}</span>
+    <span class="title">{todo.title}</span>
+    <span class="details">{todo.details}</span>
+  </div>
+{/each}
 
 <style>
 .card {
