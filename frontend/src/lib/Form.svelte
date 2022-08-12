@@ -10,7 +10,8 @@
     const res = await fetch(`http://localhost:8081/todo`, {
       method: 'POST',
       body: JSON.stringify({
-        title
+        title,
+        details,
       }),
       headers: {
         "content-type": "application/json"
