@@ -34,10 +34,14 @@
 <div class="card">
   <span class="card-title">{todo.title}</span>
 
-  <span class="created">{dateDiffHuman(todo.created_at)} ago</span>
+  <span class="grey-text text-darken-1">
+    created {dateDiffHuman(todo.created_at)} ago
+  </span>
 
   {#if Date.parse(todo.resolved_at) != Date.parse("1970-01-01")}
-    <span class="resolved">{dateDiffHuman(todo.resolved_at)} ago</span>
+    <span class="grey-text text-darken-1">
+      resolved {dateDiffHuman(todo.resolved_at)} ago
+    </span>
   {/if}
 
   {#if Date.parse(todo.resolved_at) == Date.parse("1970-01-01")}
@@ -47,8 +51,14 @@
   {/if}
 
   {#if todo.details}
-  <div class="card-content">
-    <span class="details">{todo.details}</span>
-  </div>
+    <p class="grey-text text-darken-4">
+      {todo.details}
+    </p>
   {/if}
 </div>
+
+<style>
+  .card {
+    padding: 1em;
+  }
+</style>
