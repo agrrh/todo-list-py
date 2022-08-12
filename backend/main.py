@@ -59,9 +59,12 @@ async def get_todo(pk: str, request: Request, response: Response):
 
 @app.put("/todo/{pk}/resolve")
 async def resolve_todo(pk: str, request: Request, response: Response):
+    EXPIRE_TTL = 60 * 15
+
     try:
         todo = TodoTask.get(pk)
         todo.resolved_at = datetime.now()
+        todo.expire(EXPIRE_TTL)
 
         return todo.save()
     except NotFoundError:
@@ -73,6 +76,7 @@ async def unresolve_todo(pk: str, request: Request, response: Response):
     try:
         todo = TodoTask.get(pk)
         todo.resolved_at = 0
+        todo.expire(0)
 
         return todo.save()
     except NotFoundError:
