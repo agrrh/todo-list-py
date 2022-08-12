@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 
 from starlette.requests import Request
 from starlette.responses import Response
@@ -13,6 +14,20 @@ import uuid
 
 app = FastAPI()
 
+origins = [
+    "http://localhost",
+    "http://localhost:5173",
+    "http://localhost:8081",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 REDIS_DATA_URL = "redis://redis:6379"
 
 
@@ -22,7 +37,7 @@ def read_root():
 
 
 @app.post("/todo")
-async def save_customer(todo: TodoTask):
+async def save_todo(todo: TodoTask):
     todo.pk = str(uuid.uuid4())
     todo.created_at = datetime.now()
     return todo.save()
@@ -30,7 +45,7 @@ async def save_customer(todo: TodoTask):
 
 @app.get("/todos")
 async def list_todo(request: Request, response: Response):
-    return {"todo": TodoTask.all_pks()}
+    return {"todos": [TodoTask.get(pk) for pk in TodoTask.all_pks()]}
 
 
 @app.get("/todo/{pk}")
