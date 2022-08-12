@@ -45,7 +45,8 @@ async def save_todo(todo: TodoTask):
 
 @app.get("/todos")
 async def list_todo(request: Request, response: Response):
-    return {"todos": [TodoTask.get(pk) for pk in TodoTask.all_pks()]}
+    todos_list = [TodoTask.get(pk) for pk in TodoTask.all_pks()]
+    return {"todos": sorted(todos_list, key=lambda x: x.created_at, reverse=True)}
 
 
 @app.get("/todo/{pk}")
