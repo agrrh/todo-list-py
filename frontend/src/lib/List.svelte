@@ -1,5 +1,6 @@
 <script>
   import { todosRefreshTime, todos } from '../stores.js'
+  import { poll } from '../poll.js';
 
   let promise = fetchTodosList();
 
@@ -13,6 +14,9 @@
       throw new Error(data);
     }
   }
+
+  // Fetch every 5 seconds
+  poll(fetchTodosList, 5000);
 
   async function resolve(todo) {
     const res = await fetch(`http://localhost:8081/todo/` + todo.pk + `/resolve`, {
