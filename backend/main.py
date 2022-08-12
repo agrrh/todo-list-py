@@ -56,6 +56,28 @@ async def get_todo(pk: str, request: Request, response: Response):
         raise HTTPException(status_code=404, detail="Task not found")
 
 
+@app.put("/todo/{pk}/resolve")
+async def resolve_todo(pk: str, request: Request, response: Response):
+    try:
+        todo = TodoTask.get(pk)
+        todo.resolved_at = datetime.now()
+
+        return todo.save()
+    except NotFoundError:
+        raise HTTPException(status_code=404, detail="Task not found")
+
+
+@app.put("/todo/{pk}/unresolve")
+async def unresolve_todo(pk: str, request: Request, response: Response):
+    try:
+        todo = TodoTask.get(pk)
+        todo.resolved_at = 0
+
+        return todo.save()
+    except NotFoundError:
+        raise HTTPException(status_code=404, detail="Task not found")
+
+
 @app.on_event("startup")
 async def startup():
     TodoTask.Meta.database = get_redis_connection(url=REDIS_DATA_URL, decode_responses=True)
