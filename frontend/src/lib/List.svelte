@@ -107,15 +107,3 @@
     </div>
   </div>
 {/each}
-
-<style>
-.card {
-  background: #eee;
-  transition: background-color 0.5s;
-}
-
-.card:hover {
-  background-color: #aaa;
-  transition: background-color 0.5s;
-}
-</style>
