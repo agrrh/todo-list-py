@@ -8,6 +8,7 @@ from models.todo_task import TodoTask
 
 from redis_om import get_redis_connection, NotFoundError
 
+import time
 from datetime import datetime
 import uuid
 
@@ -44,9 +45,23 @@ async def save_todo(todo: TodoTask):
 
 
 @app.get("/todos")
-async def list_todo(request: Request, response: Response):
+async def list_todos(request: Request, response: Response):
     todos_list = [TodoTask.get(pk) for pk in TodoTask.all_pks()]
-    return {"todos": sorted(todos_list, key=lambda x: x.created_at, reverse=True)}
+
+    result = []
+
+    null_date = datetime.fromtimestamp(0)
+
+    unresolved_list = filter(lambda x: x.resolved_at > null_date, todos_list)
+    unresolved_list = sorted(unresolved_list, key=lambda x: x.created_at, reverse=True)
+
+    resolved_list = filter(lambda x: x.resolved_at == null_date, todos_list)
+    resolved_list = sorted(resolved_list, key=lambda x: x.created_at, reverse=True)
+
+    result.extend(resolved_list)
+    result.extend(unresolved_list)
+
+    return {"todos": result}
 
 
 @app.get("/todo/{pk}")
@@ -63,7 +78,7 @@ async def resolve_todo(pk: str, request: Request, response: Response):
 
     try:
         todo = TodoTask.get(pk)
-        todo.resolved_at = datetime.now()
+        todo.resolved_at = datetime.fromtimestamp(int(time.time()))
         todo.expire(EXPIRE_TTL)
 
         return todo.save()
@@ -75,7 +90,7 @@ async def resolve_todo(pk: str, request: Request, response: Response):
 async def unresolve_todo(pk: str, request: Request, response: Response):
     try:
         todo = TodoTask.get(pk)
-        todo.resolved_at = 0
+        todo.resolved_at = datetime.fromtimestamp(0)
         todo.expire(0)
 
         return todo.save()

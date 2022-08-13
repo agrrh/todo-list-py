@@ -9,7 +9,7 @@ class TodoTask(HashModel):
     title: str
     details: Optional[str]
     created_at: Optional[datetime]
-    resolved_at: Optional[datetime] = 0
+    resolved_at: Optional[datetime] = datetime.fromtimestamp(0)
 
     @validator("title")
     def title_must_not_be_empty(cls, v):
