@@ -31,7 +31,7 @@
   }
 </script>
 
-<div class="card">
+<div class="card hoverable {Date.parse(todo.resolved_at) != Date.parse("1970-01-01T00:00") ? 'grey' : 'yellow'} lighten-4">
   <span class="card-title">{todo.title}</span>
 
   <span class="grey-text text-darken-1">
@@ -54,6 +54,12 @@
     <p class="grey-text text-darken-4">
       {todo.details}
     </p>
+  {/if}
+
+  {#if Date.parse(todo.resolved_at) != Date.parse("1970-01-01T00:00")}
+  <div class="progress">
+    <div class="determinate" style="width: {todo.ttl_left_percentage}%"></div>
+  </div>
   {/if}
 </div>
 
