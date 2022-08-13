@@ -7,3 +7,7 @@ Simple app made for fun and education purposes.
 ## Main screen
 
 ![screen-list](./docs/images/screen-list.png)
+
+## Adding new task
+
+![screen-form](./docs/images/screen-form.png)
