@@ -9,10 +9,9 @@ Simple app made for fun and education purposes.
 
 ## Tech stack
 
-- [Svelte](https://svelte.dev/) - frontend
-- [FastAPI](https://fastapi.tiangolo.com/) - backend
-  - [python-redis-om](https://github.com/redis/redis-om-python) - objects mapping
-- [Redis](https://redis.io/) - storage
+- [Svelte](https://svelte.dev/) with [MaterializeCSS](https://materializecss.com/)
+- [FastAPI](https://fastapi.tiangolo.com/) with [python-redis-om](https://github.com/redis/redis-om-python)
+- [Redis](https://redis.io/)
 
 # Screenshots
 
