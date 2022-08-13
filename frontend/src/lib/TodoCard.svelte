@@ -38,13 +38,13 @@
     created {dateDiffHuman(todo.created_at)} ago
   </span>
 
-  {#if Date.parse(todo.resolved_at) != Date.parse("1970-01-01")}
+  {#if Date.parse(todo.resolved_at) != Date.parse("1970-01-01T00:00")}
     <span class="grey-text text-darken-1">
       resolved {dateDiffHuman(todo.resolved_at)} ago
     </span>
   {/if}
 
-  {#if Date.parse(todo.resolved_at) == Date.parse("1970-01-01")}
+  {#if Date.parse(todo.resolved_at) == Date.parse("1970-01-01T00:00")}
     <button class="btn-small right" on:click={() => resolve(todo)}><i class="material-icons">check</i></button>
   {:else}
     <button class="btn-small right" on:click={() => unresolve(todo)}><i class="material-icons">restore</i></button>
