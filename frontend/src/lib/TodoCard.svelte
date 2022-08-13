@@ -32,23 +32,34 @@
 </script>
 
 <div class="card hoverable {Date.parse(todo.resolved_at) != Date.parse("1970-01-01T00:00") ? 'grey' : 'yellow'} lighten-4">
-  <span class="card-title">{todo.title}</span>
+  <div class="card-header row">
+    <div class="card-title col s11">
+      {todo.title}
 
-  <span class="grey-text text-darken-1">
-    created {dateDiffHuman(todo.created_at)} ago
-  </span>
+      {#if Date.parse(todo.resolved_at) != Date.parse("1970-01-01T00:00")}
+        <span class="badge grey-text text-darken-1">
+          resolved {dateDiffHuman(todo.resolved_at)} ago
+        </span>
+      {/if}
 
-  {#if Date.parse(todo.resolved_at) != Date.parse("1970-01-01T00:00")}
-    <span class="grey-text text-darken-1">
-      resolved {dateDiffHuman(todo.resolved_at)} ago
-    </span>
-  {/if}
+      <span class="badge grey-text text-darken-1">
+        created {dateDiffHuman(todo.created_at)} ago
+      </span>
+    </div>
 
-  {#if Date.parse(todo.resolved_at) == Date.parse("1970-01-01T00:00")}
-    <button class="btn-small right" on:click={() => resolve(todo)}><i class="material-icons">check</i></button>
-  {:else}
-    <button class="btn-small right" on:click={() => unresolve(todo)}><i class="material-icons">restore</i></button>
-  {/if}
+    <div class="col s1">
+      {#if Date.parse(todo.resolved_at) == Date.parse("1970-01-01T00:00")}
+        <button class="btn-small right" on:click={() => resolve(todo)}><i class="material-icons">check</i></button>
+      {:else}
+        <button class="btn-small right" on:click={() => unresolve(todo)}><i class="material-icons">restore</i></button>
+      {/if}
+    </div>
+  </div>
+
+
+
+
+
 
   {#if todo.details}
     <p class="grey-text text-darken-4">
