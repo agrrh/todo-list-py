@@ -4,9 +4,13 @@
 </script>
 
 <main>
-  <h1 class="header">Todo List Python</h1>
+  <h1 class="header">
+    Todo List Python
 
-  <div class="divider"></div>
+    <button class="btn-floating btn-large modal-trigger waves-effect waves-light" data-target="modal-form">
+      <i class="material-icons">add</i>
+    </button>
+  </h1>
 
   <div class="section">
     <Form />
