@@ -2,6 +2,11 @@
 
 Simple app made for fun and education purposes.
 
+## Usage
+
+- Run `make up`
+- Visit [http://localhost:8080/](http://localhost:8080/)
+
 ## Tech stack
 
 - [Svelte](https://svelte.dev/) - frontend
