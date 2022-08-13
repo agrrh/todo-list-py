@@ -64,6 +64,13 @@ async def list_todos(request: Request, response: Response):
     return {"todos": result}
 
 
+@app.delete("/todos")
+async def delete_todos(request: Request, response: Response):
+    [TodoTask.delete(pk) for pk in TodoTask.all_pks()]
+
+    return {"result": True}
+
+
 @app.get("/todo/{pk}")
 async def get_todo(pk: str, request: Request, response: Response):
     try:
