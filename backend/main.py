@@ -81,7 +81,7 @@ async def get_todo(pk: str, request: Request, response: Response):
 
 @app.put("/todo/{pk}/resolve")
 async def resolve_todo(pk: str, request: Request, response: Response):
-    EXPIRE_TTL = 60 * 15
+    EXPIRE_TTL = 60 * 5
 
     try:
         todo = TodoTask.get(pk)
