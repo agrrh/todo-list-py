@@ -23,8 +23,6 @@
   todosRefreshTime.subscribe((value) => fetchTodosList())
 </script>
 
-<h2>Current Todos</h2>
-
 {#each $todos as todo, i}
   <TodoCard todo={todo} />
 {/each}
