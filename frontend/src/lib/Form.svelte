@@ -23,25 +23,35 @@
 
     todosRefreshTime.set(Date.now());
   }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.modal')
+    var instances = M.Modal.init(elems)
+  });
 </script>
 
 
-<div class="row">
-  <div class="input-field col s6">
-    <i class="material-icons prefix">edit</i>
+<div id="modal-form" class="modal">
+  <div class="modal-content input-field">
     <input type="text" id="title" bind:value="{title}">
     <label for="title">Title</label>
   </div>
 
-  <div class="input-field col s12">
+  <div class="modal-content input-field">
     <textarea bind:value="{details}" id="details" class="materialize-textarea"></textarea>
     <label for="details">Details</label>
   </div>
 
-  <div class="col s4">
-    <button class="btn waves-effect waves-light" type="submit" on:click={createTodo}>
+  <div class="modal-footer">
+    <button class="btn waves-effect waves-light modal-close" type="submit" on:click={createTodo}>
       <i class="material-icons right">send</i>
       Submit
     </button>
   </div>
 </div>
+
+<style>
+  .modal {
+    padding: 2em;
+  }
+</style>
