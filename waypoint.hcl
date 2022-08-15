@@ -50,6 +50,9 @@ app "backend" {
       load_balancer = false
       port          = 3000
       ingress "http" {
+        annotations = {
+          "kubernetes.io/ingress.class" = "public"
+        }
         host = "back.agrrh.tech"
         path = "/"
       }
@@ -94,6 +97,9 @@ app "frontend" {
       load_balancer = false
       port          = 80
       ingress "http" {
+        annotations = {
+          "kubernetes.io/ingress.class" = "public"
+        }
         host = "front.agrrh.tech"
         path = "/"
       }
