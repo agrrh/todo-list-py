@@ -9,6 +9,10 @@ runner {
   }
 }
 
+labels = {
+  "app" = "todo-list-py"
+}
+
 app "backend" {
   build {
     use "docker" {
@@ -27,11 +31,29 @@ app "backend" {
   }
 
   deploy {
-    use "kubernetes" {}
+    use "kubernetes" {
+      namespace = "todo-list-py"
+      pod {
+        container {
+          port {
+            name = "http"
+            port = 3000
+          }
+        }
+      }
+    }
   }
 
   release {
-    use "kubernetes" {}
+    use "kubernetes" {
+      namespace = "todo-list-py"
+      load_balancer = false
+      port          = 3000
+      ingress "http" {
+        host = "back.agrrh.tech"
+        path = "/"
+      }
+    }
   }
 }
 
@@ -53,11 +75,29 @@ app "frontend" {
   }
 
   deploy {
-    use "kubernetes" {}
+    use "kubernetes" {
+      namespace = "todo-list-py"
+      pod {
+        container {
+          port {
+            name = "http"
+            port = 80
+          }
+        }
+      }
+    }
   }
 
   release {
-    use "kubernetes" {}
+    use "kubernetes" {
+      namespace = "todo-list-py"
+      load_balancer = false
+      port          = 80
+      ingress "http" {
+        host = "front.agrrh.tech"
+        path = "/"
+      }
+    }
   }
 }
 
