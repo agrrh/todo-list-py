@@ -107,6 +107,23 @@ app "frontend" {
   }
 }
 
+app "redis" {
+  build {
+    use "docker-pull" {
+      image = "redis"
+      tag   = "7"
+    }
+  }
+
+  deploy {
+    use "kubernetes-apply" {
+      path = templatedir("${path.app}/kubernetes/redis")
+      prune_label = "app-part=redis"
+    }
+  }
+}
+
+
 variable "docker_hub_password" {
   type    = string
   default = ""
