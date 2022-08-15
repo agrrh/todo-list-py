@@ -53,7 +53,7 @@ app "backend" {
         annotations = {
           "kubernetes.io/ingress.class" = "public"
         }
-        host = "back.agrrh.tech"
+        host = "todo-back.agrrh.com"
         path = "/"
       }
     }
@@ -100,7 +100,7 @@ app "frontend" {
         annotations = {
           "kubernetes.io/ingress.class" = "public"
         }
-        host = "front.agrrh.tech"
+        host = "todo.agrrh.com"
         path = "/"
       }
     }
