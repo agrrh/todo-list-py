@@ -2,12 +2,14 @@
   import { todosRefreshTime, todos } from '../stores.js'
   import { poll } from '../poll.js';
 
+  import { api } from '../api.js'
+
   import TodoCard from './TodoCard.svelte'
 
   let promise = fetchTodosList();
 
   async function fetchTodosList() {
-    const res = await fetch(`http://localhost:8081/todos`);
+    const res = await fetch(api + `/todos`);
     const data = await res.json();
 
     if (res.ok) {

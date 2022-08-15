@@ -2,10 +2,12 @@
   import { todosRefreshTime } from '../stores.js'
   import { dateDiffHuman } from '../dateDiffHuman.js';
 
+  import { api } from '../api.js'
+
   export let todo;
 
   async function resolve(todo) {
-    const res = await fetch(`http://localhost:8081/todo/` + todo.pk + `/resolve`, {
+    const res = await fetch(api + `/todo/` + todo.pk + `/resolve`, {
       method: 'PUT'
     })
     const data = await res.json()
@@ -18,7 +20,7 @@
   }
 
   async function unresolve(todo) {
-    const res = await fetch(`http://localhost:8081/todo/` + todo.pk + `/unresolve`, {
+    const res = await fetch(api + `/todo/` + todo.pk + `/unresolve`, {
       method: 'PUT'
     })
     const data = await res.json()
