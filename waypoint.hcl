@@ -11,7 +11,9 @@ runner {
 
 app "backend" {
   build {
-    use "docker" {}
+    use "docker" {
+      context = "backend"
+    }
   }
 
   deploy {
@@ -25,7 +27,9 @@ app "backend" {
 
 app "frontend" {
   build {
-    use "docker" {}
+    use "docker" {
+      context = "frontend"
+    }
   }
 
   deploy {
