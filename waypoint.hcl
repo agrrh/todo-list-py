@@ -12,7 +12,7 @@ runner {
 app "backend" {
   build {
     use "docker" {
-      context = "backend"
+      dockerfile = "backend/Dockerfile"
     }
   }
 
@@ -28,7 +28,7 @@ app "backend" {
 app "frontend" {
   build {
     use "docker" {
-      context = "frontend"
+      dockerfile = "frontend/Dockerfile"
     }
   }
 
