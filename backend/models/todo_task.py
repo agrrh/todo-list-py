@@ -19,7 +19,7 @@ class TodoTask(HashModel):
 
         value = (time.time() - values.get("resolved_at").timestamp()) / EXPIRE_TTL
 
-        return (1 - round(value, 4)) * 100
+        return 0 if value < 0 else (1 - round(value, 4)) * 100
 
     @validator("title")
     def title_must_not_be_empty(cls, v):
