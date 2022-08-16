@@ -1,14 +1,5 @@
 project = "todo-list-py"
 
-runner {
-  enabled = true
-
-  data_source "git" {
-    url = "https://github.com/agrrh/todo-list-py.git"
-    ref = "hotfix/1660596201"
-  }
-}
-
 labels = {
   "app" = "todo-list-py"
 }
