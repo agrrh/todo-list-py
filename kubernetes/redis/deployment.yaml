@@ -1,0 +1,30 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+  namespace: todo-list-py
+  labels:
+    app: list-todo-py
+    app-part: redis
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: list-todo-py
+      app-part: redis
+  template:
+    metadata:
+      labels:
+        app: list-todo-py
+        app-part: redis
+    spec:
+      containers:
+        - name: redis
+          image: redis:7
+
+          ports:
+            - name: redis
+              containerPort: 6379

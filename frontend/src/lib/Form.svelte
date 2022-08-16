@@ -2,12 +2,14 @@
   import { createEventDispatcher } from 'svelte';
   import { todosRefreshTime } from '../stores.js'
 
+  import { api } from '../api.js'
+
   let title = ''
   let details = ''
   let result = null
 
   async function createTodo () {
-    const res = await fetch(`http://localhost:8081/todo`, {
+    const res = await fetch(api + `/todo`, {
       method: 'POST',
       body: JSON.stringify({
         title,

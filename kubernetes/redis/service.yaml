@@ -1,0 +1,21 @@
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+  namespace: todo-list-py
+  labels:
+    app: list-todo-py
+    app-part: redis
+
+spec:
+  selector:
+    app: list-todo-py
+    app-part: redis
+
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      port: 6379
+      targetPort: redis
